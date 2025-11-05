@@ -1,104 +1,247 @@
-/* CSS Variables for Theme Management */
+/* CSS Variables for Theme Management adjusted to style guide */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
+  --primary: #3b82f6;
+  --secondary: #64748b;
+  --success: #06b6d4;
+  --error: #EF4444;
+
+  --bg-primary: #f9fafb;
+  --bg-secondary: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #64748b;
+  --border-color: #e5e7eb;
+
+  --button-bg: var(--primary);
   --button-text: #ffffff;
 }
 
 [data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
+  --bg-primary: #0b1220;
+  --bg-secondary: #0f172a;
+  --text-primary: #e5e7eb;
+  --text-secondary: #94a3b8;
+  --border-color: #1f2937;
+
+  --button-bg: #2563eb;
   --button-text: #ffffff;
 }
 
+* { box-sizing: border-box; }
+
+body, html, #root, .App {
+  height: 100%;
+}
+
 .App {
-  text-align: center;
-  background-color: var(--bg-primary);
+  background: var(--bg-primary);
   color: var(--text-primary);
-  min-height: 100vh;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+.header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  justify-content: space-between;
+  margin-bottom: 24px;
 }
 
-.App-link {
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
   color: var(--text-secondary);
-  transition: color 0.3s ease;
+  font-size: 14px;
 }
 
 .theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
   background-color: var(--button-bg);
   color: var(--button-text);
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
+  border-radius: 10px;
+  padding: 10px 14px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.25);
+}
+.theme-toggle:hover { transform: translateY(-1px); opacity: .95; }
+.theme-toggle:active { transform: translateY(0); }
+
+.card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.05);
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+/* Form styles */
+.todo-form {
+  padding: 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.form-row { width: 100%; }
+
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-primary);
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.form-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
 }
 
-/* Responsive design for mobile */
+.error-text {
+  color: var(--error);
+  font-size: 13px;
+}
+
+/* Buttons */
+.btn {
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.25);
+}
+.btn-primary:hover { opacity: .95; transform: translateY(-1px); }
+.btn-secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+.btn-secondary:hover { border-color: var(--text-secondary); }
+.btn-danger {
+  background: var(--error);
+  color: #fff;
+}
+.btn-danger:hover { opacity: .95; }
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+.btn-ghost:hover { color: var(--text-primary); }
+
+/* Todo list */
+.todo-list {
+  display: grid;
+  gap: 12px;
+}
+
+.todo-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.todo-card.completed .todo-title {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+.todo-main {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  align-items: start;
+  gap: 12px;
+}
+
+.checkbox {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+.checkbox input {
+  position: absolute;
+  width: 1px; height: 1px; opacity: 0;
+}
+.checkmark {
+  width: 24px; height: 24px;
+  display: inline-block;
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  transition: all .2s ease;
+}
+.checkbox input:checked + .checkmark {
+  background: linear-gradient(135deg, var(--primary), var(--success));
+  border-color: transparent;
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.35);
+}
+.checkbox input:checked + .checkmark::after {
+  content: '✓';
+  color: white;
+  font-size: 16px;
+  position: relative;
+  left: 4px;
+  top: 1px;
+}
+
+.todo-content .todo-title {
+  font-weight: 700;
+  font-size: 16px;
+}
+.todo-description {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.empty-state {
+  color: var(--text-secondary);
+  padding: 20px;
+  text-align: center;
+  border: 1px dashed var(--border-color);
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.03);
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
-  }
+  .container { padding: 24px 14px 64px; }
+  .title { font-size: 22px; }
+  .theme-toggle { padding: 8px 12px; font-size: 13px; }
 }
