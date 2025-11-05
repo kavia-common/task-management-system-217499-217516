@@ -98,7 +98,14 @@ function App() {
   const handleUpdate = async (id, updates) => {
     try {
       setErrorMsg('');
-      const updated = await updateTodo(id, updates);
+      // Backend PUT requires title, description, and completed fields.
+      const current = todos.find((t) => t.id === id) || {};
+      const payload = {
+        title: updates.title ?? current.title ?? '',
+        description: updates.description ?? current.description ?? '',
+        completed: typeof updates.completed === 'boolean' ? updates.completed : !!current.completed,
+      };
+      const updated = await updateTodo(id, payload);
       setTodos((prev) =>
         prev.map((t) =>
           t.id === id

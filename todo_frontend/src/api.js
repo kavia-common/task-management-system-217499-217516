@@ -1,4 +1,4 @@
-const API_BASE = process.env.REACT_APP_API_BASE || 'http://localhost:5001';
+const API_BASE = process.env.REACT_APP_API_BASE || 'http://localhost:5001/api';
 
 // Helper to handle JSON responses and errors
 async function request(path, options = {}) {
@@ -65,7 +65,8 @@ export async function deleteTodo(id) {
 // PUBLIC_INTERFACE
 export async function toggleTodoComplete(id, completed) {
   /** Toggle completion status of a todo. Returns updated todo. */
-  return updateTodo(id, { completed });
+  const flag = completed ? 'true' : 'false';
+  return request(`/tasks/${id}/complete?complete=${flag}`, { method: 'PATCH' });
 }
 
 export default {
